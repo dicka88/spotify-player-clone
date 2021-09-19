@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify</title>
+  <link rel="icon" sizes="16x16" type="image/png" href="https://open.scdn.co/cdn/images/favicon16.c498a969.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vendor/tailwindcss/dist/tailwind.min.css">
+  <link rel="stylesheet" href="./vendor/fontawesome-free-5.15.4-web/css/all.min.css">
+  <link rel="stylesheet" href="./src/styles/app.css">
+</head>
+
+<body>
+  <main class="p-6 bg-gradient-to-b from-blue-500 to-black">
+    <div class="flex justify-between">
+      <button>
+        <i class="fa fa-angle-down"></i>
+      </button>
+      <div class="text-center">
+        <span class="block text-xs">PLAYING FROM PLAYLIST</span>
+        <span class="block text-xs font-bold">Top 50 - Indonesia</span>
+      </div>
+      <button>
+        <i class="fa fa-ellipsis-v"></i>
+      </button>
+    </div>
+    <div class="my-12">
+      <img src="./src/img/bieber-laroi.png" alt="">
+    </div>
+    <div>
+      <div class="flex justify-between px-1">
+        <div>
+          <span class="block font-bold leading-3">STAY (with Justin Bieber)</span>
+          <small>The Kid KAROI, Justin Bieber</small>
+        </div>
+        <button>
+          <i class="far fa-heart"></i>
+        </button>
+      </div>
+      <div class="block px-1">
+        <div class="relative">
+          <input type="range" class="w-full spotify-slider" value="0"
+            @change="(e) => $store.music.seekTo(e.target.value)" x-data :value="$store.music.seekSlider" min="0"
+            max="100" name="" id="">
+        </div>
+        <div class="flex justify-between">
+          <small x-data x-text="$store.music.elapsedTimeDisplay">00:00</small>
+          <small x-data x-text="$store.music.durationDisplay">00:00</small>
+        </div>
+      </div>
+      <div class="flex justify-between items-center mb-5">
+        <button class="mx-1"><i class="fa fa-random"></i></button>
+        <div class="flex justify-between items-center">
+          <audio x-ref="spotify-audio" class="hidden"
+            src="./src/audio/The Kid LAROI, Justin Bieber - STAY (Official Video).mp3"></audio>
+          <button>
+            <i class="fa fa-step-backward"></i>
+          </button>
+          <button x-data @click="$store.music.togglePlay()"
+            class="rounded-full mx-5 p-4 bg-white flex justify-center items-center" style="width: 50px; height: 50px;">
+            <i x-data class="fa text-black" :class="$store.music.isPlay ? 'fa-pause' : 'fa-play'"></i>
+          </button>
+          <button>
+            <i class="fa fa-step-forward"></i>
+          </button>
+        </div>
+        <button class="mx-1">
+          <svg aria-hidden="true" style="height: 14px; width: 14px;" focusable="false" data-prefix="fal"
+            data-icon="repeat" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+            class="svg-inline--fa fa-repeat fa-w-16 fa-2x">
+            <path fill="currentColor"
+              d="M512 256c0 88.225-71.775 160-160 160H110.628l68.201 68.201c4.686 4.686 4.686 12.284 0 16.971l-5.656 5.656c-4.686 4.686-12.284 4.686-16.971 0l-98.343-98.343c-4.686-4.686-4.686-12.284 0-16.971l98.343-98.343c4.686-4.686 12.284-4.686 16.971 0l5.656 5.656c4.686 4.686 4.686 12.284 0 16.971L110.628 384H352c70.579 0 128-57.421 128-128 0-28.555-9.403-54.952-25.271-76.268-3.567-4.792-3.118-11.462 1.106-15.686l5.705-5.705c5.16-5.16 13.678-4.547 18.083 1.271C499.935 186.438 512 219.835 512 256zM57.271 332.268C41.403 310.952 32 284.555 32 256c0-70.579 57.421-128 128-128h241.372l-68.201 68.201c-4.686 4.686-4.686 12.284 0 16.971l5.656 5.656c4.686 4.686 12.284 4.686 16.971 0l98.343-98.343c4.686-4.686 4.686-12.284 0-16.971L355.799 5.172c-4.686-4.686-12.284-4.686-16.971 0l-5.656 5.656c-4.686 4.686-4.686 12.284 0 16.971L401.372 96H160C71.775 96 0 167.775 0 256c0 36.165 12.065 69.562 32.376 96.387 4.405 5.818 12.923 6.432 18.083 1.271l5.705-5.705c4.225-4.224 4.674-10.893 1.107-15.685z"
+              class=""></path>
+          </svg>
+          <!-- <i class="fa fa-random"></i> -->
+        </button>
+      </div>
+      <div class="flex justify-between">
+        <button class="mx-1">
+          <svg aria-hidden="true" focusable="false" style="height: 14px; width: 14px;" data-prefix="far"
+            data-icon="computer-speaker" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
+            class="svg-inline--fa fa-computer-speaker fa-w-20 fa-2x">
+            <path fill="currentColor"
+              d="M592 32H368a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h224a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48zm0 400H368V80h224zm-480 0a16 16 0 0 0-16 16v16a16 16 0 0 0 16 16h192.41A79.24 79.24 0 0 1 288 432zM0 80v256a48 48 0 0 0 48 48h240v-48H48V80h240a79.24 79.24 0 0 1 16.41-48H48A48 48 0 0 0 0 80zm480 112a32 32 0 1 0-32-32 32 32 0 0 0 32 32zm0 208a80 80 0 1 0-80-80 80 80 0 0 0 80 80zm0-112a32 32 0 1 1-32 32 32 32 0 0 1 32-32z"
+              class=""></path>
+          </svg>
+        </button>
+        <div class="flex justify-between">
+          <button class="mx-1"><i class="fa fa-share-alt"></i></button>
+          <button class="mx-1"><i class="fa fa-list-alt"></i></button>
+        </div>
+      </div>
+      <div class="my-4">
+        <div class="bg-blue-500 rounded-md w-full p-4">
+          <div class="flex justify-between mb-3">
+            <small class="font-thin">LYRICS</small>
+            <button class="rounded-full bg-blue-800 text-xs" style="width: 20px; height: 20px;">
+              <i class="fa fa-expand"></i>
+            </button>
+          </div>
+          <div class="content pr-5">
+            <p class="leading-8 font-bold">I need you to stay, need you to stay, hey</p>
+            <p class="leading-8 font-bold">When I'm away from you, I miss your touch (ooh-ooh)</p>
+            <p class="leading-8 font-bold text-black">You're the reason I believe in love I'ts been difficult for me to
+              trust(ooh-ooh)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+  <script src="./src/js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+{
+  "data": {
+    "musics": [
+      {
+        "id": "1",
+        "title": "STAY",
+        "singer": "The Kid KAROI, Justin Bieber",
+        "thumbnail": "src/img/bieber-laroi",
+        "audio": "src/audio/The Kid LAROI, Justin Bieber - STAY (Official Video).mp3",
+        "lyric_url": "json/lyrics/laroi.json"
+      }
+    ]
+  }
+}
